@@ -14,7 +14,7 @@ class RootController : Controller() {
 
     fun chooseDirectory(currentStage: Stage?): String? {
         val chooser = DirectoryChooser()
-        return chooser.showDialog(currentStage).absolutePath ?: return null
+        return chooser.showDialog(currentStage)?.absolutePath ?: return null
     }
 
     fun generateModSkeleton(generationModel: GenerationModel): String {
