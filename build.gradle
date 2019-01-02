@@ -1,0 +1,53 @@
+buildscript {
+    ext.kotlin_version = "1.2.51"
+    ext.tornadofx_version = "1.7.17"
+    ext.junit_version = "5.1.0"
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.junit.platform:junit-platform-gradle-plugin:1.1.0"
+        classpath "com.github.jengelman.gradle.plugins:shadow:4.0.3"
+    }
+}
+
+apply plugin: "kotlin"
+apply plugin: "application"
+apply plugin: "idea"
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: "org.junit.platform.gradle.plugin"
+mainClassName = "com.trivaxy.offlinemodgen.OfflineModGen"
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots/"
+    }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    compile "no.tornado:tornadofx:$tornadofx_version"
+
+    testCompile "org.junit.jupiter:junit-jupiter-api:$junit_version"
+    testRuntime "org.junit.jupiter:junit-jupiter-engine:$junit_version"
+}
+
+jar {
+    manifest {
+        attributes(
+            //    "Class-Path": configurations.compile.collect { it.getName() }.join(" "),
+                "Main-Class": mainClassName
+        )
+    }
+}
