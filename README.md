@@ -6,6 +6,6 @@ All the functionality that the normal mod skeleton generator has, plus the optio
 specify your .gitignore files.
 
 ## Usage and installation
-Extremely simple! Just download the jar file from the releases and run it. Make sure you have Java installed.
+Extremely simple! Just download the jar file from the [releases](https://github.com/Trivaxy/tMLOfflineModGen/releases/tag/v1.0) and run it. Make sure you have Java installed.
 Fill in the fields provided (you don't have to fill in languageVersion or build ignore files), and the installer will generate a new
 folder at the specified directory containing all your mod files.
