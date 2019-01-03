@@ -1,6 +1,7 @@
 package com.trivaxy.offlinemodgen
 
 import com.trivaxy.offlinemodgen.ext.Spring
+import com.trivaxy.offlinemodgen.model.AppPreference
 import com.trivaxy.offlinemodgen.view.RootView
 import javafx.scene.image.Image
 import javafx.stage.Stage
@@ -20,7 +21,7 @@ class KotlinApplication : App(RootView::class) {
     override val primaryView = RootView::class
 
     companion object {
-        var applicationContext : ApplicationContext by singleAssign()
+        var applicationContext: ApplicationContext by singleAssign()
     }
 
     override fun init() {
@@ -34,9 +35,11 @@ class KotlinApplication : App(RootView::class) {
             The following code facilitates DI by Spring
          */
         FX.dicontainer = object : DIContainer {
-            override fun <T : Any> getInstance(type : KClass<T>) : T = Spring.getBean(type)
-            override fun <T : Any> getInstance(type : KClass<T>, name : String) : T = Spring.getBean(type, name)
+            override fun <T : Any> getInstance(type: KClass<T>): T = Spring.getBean(type)
+            override fun <T : Any> getInstance(type: KClass<T>, name: String): T = Spring.getBean(type, name)
         }
+
+        AppPreference.initAllPreferences()
     }
 
     override fun start(stage: Stage) {

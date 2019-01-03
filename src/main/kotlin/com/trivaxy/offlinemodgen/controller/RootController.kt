@@ -1,5 +1,6 @@
 package com.trivaxy.offlinemodgen.controller
 
+import com.trivaxy.offlinemodgen.model.AppPreference
 import com.trivaxy.offlinemodgen.model.GenerationModel
 import com.trivaxy.offlinemodgen.service.GeneratorService
 import com.trivaxy.offlinemodgen.service.ValidatorService
@@ -12,9 +13,11 @@ class RootController : Controller() {
     private val validatorService: ValidatorService by di()
     private val generatorService: GeneratorService by di()
 
-    fun chooseDirectory(currentStage: Stage?): String? {
-        val chooser = DirectoryChooser()
-        return chooser.showDialog(currentStage)?.absolutePath ?: return null
+    fun chooseDirectory(currentStage: Stage?) {
+        val path = DirectoryChooser().showDialog(currentStage)?.absolutePath
+        if (path != null) {
+            AppPreference.OUTPUT_PATH.update(path)
+        }
     }
 
     fun generateModSkeleton(generationModel: GenerationModel): String {
